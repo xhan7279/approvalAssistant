@@ -3,12 +3,7 @@ package models
 
 import (
 	"time"
-
-	"github.com/fxtlabs/date"
 )
-
-// Date is a date
-type Date date.Date
 
 // ProjectModel represents one distinct project with unique id
 type ProjectModel struct {
