@@ -3,23 +3,26 @@ package models
 
 import (
 	"time"
+
+	"github.com/fxtlabs/date"
 )
 
-type Timestamp time.Time
+// Date is a date
+type Date date.Date
 
-// Project represents one distinct project with unique id
-type Project struct {
+// ProjectModel represents one distinct project with unique id
+type ProjectModel struct {
 	pID     int64  `db:"p_id, primarykey, autoincrement"`
 	name    string `db:", size:30"`
-	created Timestamp
-	due     Timestamp `db:", size:20"`
+	created int64
+	due     Date
 }
 
 // CreateProject creates a project structure
-func CreateProject(name string, due Timestamp) Project {
-	return Project{
+func CreateProject(name string, due Date) ProjectModel {
+	return ProjectModel{
 		name:    name,
-		created: Timestamp(time.Now()),
+		created: time.Now().Unix(),
 		due:     due,
 	}
 }
