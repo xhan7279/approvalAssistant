@@ -7,7 +7,7 @@ import (
 
 // ProjectModel represents one distinct project with unique id
 type ProjectModel struct {
-	pID     int64  `db:"p_id, primarykey, autoincrement"`
+	pID     int64  `db:"primarykey, autoincrement"`
 	name    string `db:", size:30"`
 	created int64
 	due     Date
