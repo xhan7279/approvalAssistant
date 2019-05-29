@@ -7,10 +7,10 @@ import (
 
 // CommentModel represents one distinct project with unique id
 type CommentModel struct {
-	cID     int64  `db:"c_id, primarykey, autoincrement"`
-	comment string `db:", size:100"`
+	cID     int64  `gorm:"primary_key";"AUTO_INCREMENT"`
+	comment string `gorm:"type:varchar(100)"`
 	created int64
-	author  int64 `db:", foreignkey"`
+	author  int64 `gorm:"ForeignKey:user_id"`
 }
 
 // CreateComment creates a comment made by user

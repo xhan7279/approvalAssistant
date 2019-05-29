@@ -1,9 +1,9 @@
 // Package models contains utility functions for database mapping.
 package models
 
-// File represents an attachment to a project
+// FileModel represents an attachment to a project
 type FileModel struct {
-	fID  int64  `db:"f_id, primarykey, autoincrement"`
-	name string `db:", size:100"`
-	pid  int64  `db:"p_id, foreignkey"`
+	fID  int64  `gorm:"primary_key";"AUTO_INCREMENT"`
+	name string `gorm:"type:varchar(100)"`
+	pid  int64  `gorm:"p_id,foreignkey"`
 }
