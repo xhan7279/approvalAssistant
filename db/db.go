@@ -26,32 +26,35 @@ func InitDb() error {
 	logger.Infof("Reading config file =", fpath)
 	fmt.Println("config=", fpath)
 
-	connstr, err := getConfig(fpath)
+	config, err := getConfig(fpath)
 	if err != nil {
 		logger.Errorf("Failed to get config", err)
 		return err
 	}
-	DB, err := gorm.Open("mysql", connstr)
+	DB, err := gorm.Open("mysql", config.ConnectionString())
 
 	if err != nil {
 		logger.Errorf("Failed to open connection", err)
 		return err
 	}
-	_ = DB
+
+	DB.DB().SetConnMaxLifetime(config.MaxConnectionTime)
+	DB.DB().SetMaxIdleConns(config.MaxIdleConns)
+	DB.DB().SetMaxOpenConns(config.MaxOpenConns)
 	return nil
 }
 
 // getConfig return a struct Configuration with server configs
-func getConfig(filepath string) (string, error) {
+func getConfig(filepath string) (*config.Configuration, error) {
 	file, err := os.Open(filepath)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	decoder := json.NewDecoder(file)
 	configuration := config.Configuration{}
 	err = decoder.Decode(&configuration)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
-	return configuration.ConnectionString(), nil
+	return &configuration, nil
 }

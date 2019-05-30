@@ -2,10 +2,13 @@ package config
 
 // Configuration is a struct represeting the database config
 type Configuration struct {
-	DatabaseType string
-	Database     string
-	User         string
-	Password     string
+	DatabaseType      string
+	Database          string
+	User              string
+	Password          string
+	MaxConnectionTime int16
+	MaxIdleConns      int8
+	MaxOpenConns      int8
 }
 
 // ConnectionString returns the MySQL connection string for database

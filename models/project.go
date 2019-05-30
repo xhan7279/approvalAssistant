@@ -7,17 +7,19 @@ import (
 
 // ProjectModel represents one distinct project with unique id
 type ProjectModel struct {
-	pID     int64  `db:"primarykey, autoincrement"`
-	name    string `db:", size:30"`
-	created int64
-	due     Date
+	pID         int64 `gorm:"primary_key"`
+	name        string
+	createdtime int64
+	duedate     Date
+	userID      int64
 }
 
 // CreateProject creates a project structure
-func CreateProject(name string, due Date) ProjectModel {
+func CreateProject(name string, duedate Date, userID int64) ProjectModel {
 	return ProjectModel{
-		name:    name,
-		created: time.Now().Unix(),
-		due:     due,
+		name:        name,
+		createdtime: time.Now().Unix(),
+		duedate:     duedate,
+		userID:      userID,
 	}
 }
