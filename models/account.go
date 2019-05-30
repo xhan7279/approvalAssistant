@@ -1,21 +1,23 @@
 // Package models contains utility functions for database mapping
 package models
 
-import "time"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 // AccountModel represents one unique user
 type AccountModel struct {
-	uID         int64  `db:"usr_id, primarykey, autoincrement"`
-	username    string `db:", size:30"`
-	password    string `db:", size:20"`
-	createdtime int64
+	gorm.Model
+	username string `gorm:"type:varchar(30);not null"`
+	password string `gorm:"type:varchar(30);not null"`
+	email    string `gorm:"type:varchar(100);not null"`
 }
 
 // CreateAccount creates an account based on username/password combination
-func CreateAccount(username, password string) AccountModel {
+func CreateAccount(username, password, email string) AccountModel {
 	return AccountModel{
-		username:    username,
-		password:    password,
-		createdtime: time.Now().Unix(),
+		username: username,
+		password: password,
+		email:    email,
 	}
 }
