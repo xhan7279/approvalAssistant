@@ -6,9 +6,9 @@ type Configuration struct {
 	Database          string
 	User              string
 	Password          string
-	MaxConnectionTime int16
-	MaxIdleConns      int8
-	MaxOpenConns      int8
+	MaxConnectionTime int32
+	MaxIdleConns      int
+	MaxOpenConns      int
 }
 
 // ConnectionString returns the MySQL connection string for database

@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 
 	// import sql
 	_ "database/sql"
@@ -38,7 +39,7 @@ func InitDb() error {
 		return err
 	}
 
-	DB.DB().SetConnMaxLifetime(config.MaxConnectionTime)
+	DB.DB().SetConnMaxLifetime(time.Duration(config.MaxConnectionTime))
 	DB.DB().SetMaxIdleConns(config.MaxIdleConns)
 	DB.DB().SetMaxOpenConns(config.MaxOpenConns)
 	return nil
